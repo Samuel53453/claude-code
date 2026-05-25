@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -17,6 +18,8 @@
                         sage: '#A3C585',
                         cream: '#FDFBF7',
                         earth: '#3E362E',
+                        'dark-bg': '#1A1C18',
+                        'dark-text': '#E2E2D5',
                     },
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
@@ -26,36 +29,40 @@
             }
         }
     </script>
-    <style>
-        .glass-nav {
-            background: rgba(253, 251, 247, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
+    </script>
     </style>
 </head>
-<body class="bg-cream text-earth font-sans">
+<body class="bg-cream text-earth font-sans dark:bg-dark-bg dark:text-dark-text transition-colors duration-300">
 
     <!-- NAVIGATION -->
-    <nav class="fixed top-0 w-full z-50 glass-nav border-b border-sage/20">
+    <nav class="fixed top-0 w-full z-50 bg-cream/80 dark:bg-dark-bg/80 backdrop-blur-md border-b border-sage/20 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center gap-2">
                     <div class="w-10 h-10 bg-forest rounded-full flex items-center justify-center">
                         <span class="text-cream text-xl font-bold">FL</span>
                     </div>
-                    <span class="text-2xl font-serif font-bold text-forest tracking-tight">FreshLeaf</span>
+                    <span class="text-2xl font-serif font-bold text-forest dark:text-sage tracking-tight">FreshLeaf</span>
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-earth hover:text-forest transition-colors font-medium">Home</a>
-                    <a href="#menu" class="text-earth hover:text-forest transition-colors font-medium">Menu</a>
-                    <a href="#about" class="text-earth hover:text-forest transition-colors font-medium">About</a>
-                    <a href="#contact" class="text-earth hover:text-forest transition-colors font-medium">Contact</a>
+                    <a href="#home" class="text-earth dark:text-dark-text hover:text-forest dark:hover:text-sage transition-colors font-medium">Home</a>
+                    <a href="#menu" class="text-earth dark:text-dark-text hover:text-forest dark:hover:text-sage transition-colors font-medium">Menu</a>
+                    <a href="#about" class="text-earth dark:text-dark-text hover:text-forest dark:hover:text-sage transition-colors font-medium">About</a>
+                    <a href="#contact" class="text-earth dark:text-dark-text hover:text-forest dark:hover:text-sage transition-colors font-medium">Contact</a>
                 </div>
 
-                <div>
-                    <a href="#menu" class="bg-forest text-cream px-6 py-2.5 rounded-full font-semibold hover:bg-earth transition-all shadow-md hover:shadow-lg active:scale-95">
+                <div class="flex items-center gap-4">
+                    <button id="theme-toggle" class="p-2 rounded-full text-earth hover:bg-sage/20 dark:text-dark-text dark:hover:bg-sage/30 transition-all duration-300">
+                        <!-- Icon inserted by JS -->
+                    </button>
+                    <a href="#menu" class="bg-forest text-cream px-6 py-2.5 rounded-full font-semibold hover:bg-earth dark:hover:bg-forest/80 transition-all shadow-md hover:shadow-lg active:scale-95">
                         Order Now
                     </a>
                 </div>
@@ -68,17 +75,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-8">
-                    <h1 class="text-5xl lg:text-7xl font-serif font-bold text-forest leading-tight">
-                        Freshness <br> <span class="text-sage">Crafted</span> by Nature
+                    <h1 class="text-5xl lg:text-7xl font-serif font-bold text-forest dark:text-sage leading-tight">
+                        Freshness <br> <span class="text-sage dark:text-sage">Crafted</span> by Nature
                     </h1>
-                    <p class="text-lg text-earth/80 leading-relaxed max-w-lg">
+                    <p class="text-lg text-earth/80 dark:text-dark-text/80 leading-relaxed max-w-lg">
                         Experience the vibrant taste of organic, farm-to-table salads. Hand-picked ingredients, chef-curated dressings, and a passion for wellness in every bowl.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#menu" class="bg-forest text-cream px-8 py-4 rounded-full font-semibold text-center hover:bg-earth transition-all shadow-lg hover:shadow-xl active:scale-95">
+                        <a href="#menu" class="bg-forest text-cream px-8 py-4 rounded-full font-semibold text-center hover:bg-earth dark:hover:bg-forest/80 transition-all shadow-lg hover:shadow-xl active:scale-95">
                             Explore Menu
                         </a>
-                        <a href="#about" class="px-8 py-4 rounded-full font-semibold text-center border-2 border-forest text-forest hover:bg-forest hover:text-cream transition-all">
+                        <a href="#about" class="px-8 py-4 rounded-full font-semibold text-center border-2 border-forest dark:border-sage text-forest dark:text-sage hover:bg-forest dark:hover:bg-sage hover:text-cream dark:hover:text-dark-bg transition-all">
                             Our Story
                         </a>
                     </div>
@@ -94,43 +101,43 @@
     </section>
 
     <!-- FEATURES -->
-    <section id="about" class="py-24 bg-white/50">
+    <section id="about" class="py-24 bg-white/50 dark:bg-dark-bg/50 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-serif font-bold text-forest mb-4">Why Choose FreshLeaf?</h2>
+                <h2 class="text-4xl font-serif font-bold text-forest dark:text-sage mb-4">Why Choose FreshLeaf?</h2>
                 <div class="w-20 h-1 bg-sage mx-auto rounded-full"></div>
             </div>
             <div class="grid md:grid-cols-3 gap-12">
-                <div class="text-center p-8 rounded-2xl bg-cream hover:bg-sage/10 transition-colors group">
-                    <div class="w-16 h-16 bg-sage/20 text-forest rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
+                <div class="text-center p-8 rounded-2xl bg-cream dark:bg-zinc-800/50 hover:bg-sage/10 dark:hover:bg-sage/20 transition-colors group">
+                    <div class="w-16 h-16 bg-sage/20 text-forest dark:text-sage rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17h12a2 2 0 002-2V5a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-forest mb-3">Freshly Sourced</h3>
-                    <p class="text-earth/70 leading-relaxed">
+                    <h3 class="text-xl font-bold text-forest dark:text-sage mb-3">Freshly Sourced</h3>
+                    <p class="text-earth/70 dark:text-dark-text/70 leading-relaxed">
                         We partner with local organic farmers to bring you ingredients harvested at their peak ripeness.
                     </p>
                 </div>
-                <div class="text-center p-8 rounded-2xl bg-cream hover:bg-sage/10 transition-colors group">
-                    <div class="w-16 h-16 bg-sage/20 text-forest rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
+                <div class="text-center p-8 rounded-2xl bg-cream dark:bg-zinc-800/50 hover:bg-sage/10 dark:hover:bg-sage/20 transition-colors group">
+                    <div class="w-16 h-16 bg-sage/20 text-forest dark:text-sage rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-2-2h4a2 2 0 002-2v-4a2 2 0 00-2-2h-4z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-forest mb-3">Chef Crafted</h3>
-                    <p class="text-earth/70 leading-relaxed">
+                    <h3 class="text-xl font-bold text-forest dark:text-sage mb-3">Chef Crafted</h3>
+                    <p class="text-earth/70 dark:text-dark-text/70 leading-relaxed">
                         Every dressing is made from scratch using premium oils and herbs for a balanced, bold flavor.
                     </p>
                 </div>
-                <div class="text-center p-8 rounded-2xl bg-cream hover:bg-sage/10 transition-colors group">
-                    <div class="w-16 h-16 bg-sage/20 text-forest rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
+                <div class="text-center p-8 rounded-2xl bg-cream dark:bg-zinc-800/50 hover:bg-sage/10 dark:hover:bg-sage/20 transition-colors group">
+                    <div class="w-16 h-16 bg-sage/20 text-forest dark:text-sage rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.382 0H20V4m0 5h.582V4a2 2 0 00-2-2h-15.382a2 2 0 00-2 2v5m15.382 0V14a2 2 0 01-2 2h-4a2 2 0 01-2-2v-4m2 4H10a2 2 0 01-2-2v-4m2 4h4" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-forest mb-3">Eco-Friendly</h3>
-                    <p class="text-earth/70 leading-relaxed">
+                    <h3 class="text-xl font-bold text-forest dark:text-sage mb-3">Eco-Friendly</h3>
+                    <p class="text-earth/70 dark:text-dark-text/70 leading-relaxed">
                         Our commitment to the planet means 100% compostable packaging and zero-waste kitchen practices.
                     </p>
                 </div>
@@ -139,25 +146,25 @@
     </section>
 
     <!-- MENU SECTION -->
-    <section id="menu" class="py-24">
+    <section id="menu" class="py-24 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-serif font-bold text-forest mb-4">Signature Bowls</h2>
-                <p class="text-earth/60 max-w-2xl mx-auto">Choose from our curated selection of nutrient-dense bowls designed to fuel your day.</p>
+                <h2 class="text-4xl font-serif font-bold text-forest dark:text-sage mb-4">Signature Bowls</h2>
+                <p class="text-earth/60 dark:text-dark-text/60 max-w-2xl mx-auto">Choose from our curated selection of nutrient-dense bowls designed to fuel your day.</p>
                 <div class="w-20 h-1 bg-sage mx-auto rounded-full mt-4"></div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Salad 1 -->
-                <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-sage/10">
+                <div class="group bg-white dark:bg-zinc-800/50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-sage/10">
                     <div class="h-64 overflow-hidden">
                         <img src="https://placehold.co/500x500?text=Mediterranean+Quinoa" alt="Mediterranean Quinoa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold text-forest mb-2">Mediterranean Quinoa</h3>
-                        <p class="text-earth/60 text-sm mb-4">Quinoa, kalamata olives, feta, cucumber, and lemon-tahini dressing.</p>
+                        <h3 class="text-lg font-bold text-forest dark:text-sage mb-2">Mediterranean Quinoa</h3>
+                        <p class="text-earth/60 dark:text-dark-text/60 text-sm mb-4">Quinoa, kalamata olives, feta, cucumber, and lemon-tahini dressing.</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-forest">$14.50</span>
-                            <button class="p-2 bg-sage text-forest rounded-full hover:bg-forest hover:text-cream transition-colors">
+                            <span class="text-xl font-bold text-forest dark:text-sage">$14.50</span>
+                            <button class="p-2 bg-sage text-forest dark:text-dark-bg rounded-full hover:bg-forest dark:hover:bg-forest hover:text-cream transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
                                 </svg>
@@ -166,16 +173,16 @@
                     </div>
                 </div>
                 <!-- Salad 2 -->
-                <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-sage/10">
+                <div class="group bg-white dark:bg-zinc-800/50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-sage/10">
                     <div class="h-64 overflow-hidden">
                         <img src="https://placehold.co/500x500?text=Spicy+Asian+Crunch" alt="Spicy Asian Crunch" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold text-forest mb-2">Spicy Asian Crunch</h3>
-                        <p class="text-earth/60 text-sm mb-4">Purple cabbage, edamame, shredded carrots, and sriracha-ginger soy.</p>
+                        <h3 class="text-lg font-bold text-forest dark:text-sage mb-2">Spicy Asian Crunch</h3>
+                        <p class="text-earth/60 dark:text-dark-text/60 text-sm mb-4">Purple cabbage, edamame, shredded carrots, and sriracha-ginger soy.</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-forest">$13.75</span>
-                            <button class="p-2 bg-sage text-forest rounded-full hover:bg-forest hover:text-cream transition-colors">
+                            <span class="text-xl font-bold text-forest dark:text-sage">$13.75</span>
+                            <button class="p-2 bg-sage text-forest dark:text-dark-bg rounded-full hover:bg-forest dark:hover:bg-forest hover:text-cream transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
                                 </svg>
@@ -184,16 +191,16 @@
                     </div>
                 </div>
                 <!-- Salad 3 -->
-                <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-sage/10">
+                <div class="group bg-white dark:bg-zinc-800/50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-sage/10">
                     <div class="h-64 overflow-hidden">
                         <img src="https://placehold.co/500x500?text=Classic+Caesar+Twist" alt="Classic Caesar Twist" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold text-forest mb-2">Classic Caesar Twist</h3>
-                        <p class="text-earth/60 text-sm mb-4">Kale and romaine, roasted chickpeas, shaved parmesan, and garlic emulsion.</p>
+                        <h3 class="text-lg font-bold text-forest dark:text-sage mb-2">Classic Caesar Twist</h3>
+                        <p class="text-earth/60 dark:text-dark-text/60 text-sm mb-4">Kale and romaine, roasted chickpeas, shaved parmesan, and garlic emulsion.</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-forest">$12.95</span>
-                            <button class="p-2 bg-sage text-forest rounded-full hover:bg-forest hover:text-cream transition-colors">
+                            <span class="text-xl font-bold text-forest dark:text-sage">$12.95</span>
+                            <button class="p-2 bg-sage text-forest dark:text-dark-bg rounded-full hover:bg-forest dark:hover:bg-forest hover:text-cream transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
                                 </svg>
@@ -202,16 +209,16 @@
                     </div>
                 </div>
                 <!-- Salad 4 -->
-                <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-sage/10">
+                <div class="group bg-white dark:bg-zinc-800/50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-sage/10">
                     <div class="h-64 overflow-hidden">
                         <img src="https://placehold.co/500x500?text=Roasted+Root+Mix" alt="Roasted Root Mix" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold text-forest mb-2">Roasted Root Mix</h3>
-                        <p class="text-earth/60 text-sm mb-4">Roasted beets, carrots, baby spinach, goat cheese, and apple cider vinaigrette.</p>
+                        <h3 class="text-lg font-bold text-forest dark:text-sage mb-2">Roasted Root Mix</h3>
+                        <p class="text-earth/60 dark:text-dark-text/60 text-sm mb-4">Roasted beets, carrots, baby spinach, goat cheese, and apple cider vinaigrette.</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold text-forest">$15.25</span>
-                            <button class="p-2 bg-sage text-forest rounded-full hover:bg-forest hover:text-cream transition-colors">
+                            <span class="text-xl font-bold text-forest dark:text-sage">$15.25</span>
+                            <button class="p-2 bg-sage text-forest dark:text-dark-bg rounded-full hover:bg-forest dark:hover:bg-forest hover:text-cream transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
                                 </svg>
