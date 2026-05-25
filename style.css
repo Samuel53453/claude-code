@@ -1,0 +1,25 @@
+/* Custom transitions and interactive enhancements */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link-active {
+    color: #2D5A27; /* forest */
+    font-weight: 600;
+}
+
+.dark .nav-link-active {
+    color: #A3C585; /* sage */
+}
+
+/* Smooth fade-in for sections */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}

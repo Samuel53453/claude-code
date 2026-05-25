@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Build/Test: Not applicable (static HTML/CSS).
 
 ## Architecture
-- Project Structure: A single-file static landing page.
-- Styling: Tailwind CSS is used via CDN for all styling and layout.
+- Project Structure: Multi-file interactive landing page (`index.html`, `style.css`, `script.js`).
+- Styling: Tailwind CSS (CDN) supplemented by custom CSS in `style.css`.
 - Layout: Responsive single-page design with sections for Hero, About, Menu, Testimonials, and Footer.
+- Interactivity: Theme switching (Light/Dark), scroll-triggered animations via Intersection Observer.
